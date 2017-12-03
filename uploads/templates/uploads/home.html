@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Yassr Blog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+   <nav class="navbar navbar-inverse">
+       <div class="container">
+           <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+               <a class="navbar-brand" href="{% url 'home' %}">Short Note</a>
+{#               <a class="navbar-brand" href="{% url 'index'  %}">Yassr's Blog</a>#}
+           </div>
+           <div class="collapse navbar-collapse" id="mynav">
+                <ul class="nav navbar-nav">
+                    <li ><a>About</a></li>
+                    <li ><a href="https://github.com/Yassr">GitHub</a></li>
+                    <li ><a href="https://www.linkedin.com/in/yassrshaar/">LinkedIn</a></li>
+                </ul>
+           </div>
+       </div>
+   </nav>
+
+   <div class="container">
+       <h1 class ="text-center"><b>Short Note</b></h1>
+
+     <br /><br />
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Upload Options <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="{% url 'simple_upload'  %}">Video Upload</a></li>
+        <li><a href="{% url 'simple_upload'  %}">Audio Upload</a></li>
+        <li><a href="{% url 'simple_upload'  %}">Text File Upload</a></li>
+
+      </ul>
+    </div>
+
+
+
+    {% block content %}
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+       <p>Uploaded File: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+
+        <ul>
+            {% for obj in document %}
+              <li>
+                <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+                <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+              </li>
+            {% endfor %}
+        </ul>
+      {% load static %}
+    {% block media %}
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <button type="submit">Upload</button>
+      </form>
+
+      {% if file_extentionV %}
+      <div align="center" class="embed-responsive embed-responsive-16by9">
+{#          <iframe class="embed-responsive-item" src="{{ uploaded_file_url }}" controls="" autoplay="" ></iframe>#}
+          <video src="{{ uploaded_file_url }}" preload="auto" controls="" autoplay=""></video>
+      </div>
+          <p>This is the video Duration : {{ obj.video_size }}</p>
+      {% endif %}
+      {% if file_extentionA %}
+          <div align="left" class="embed-responsive embed-responsive-16by9">
+            <audio src="{{ uploaded_file_url }}" preload="auto" controls="" autoplay=""></audio>
+        </div>
+      {% endif %}
+    {% endblock %}
+      </div>
+
+    </div>
+
+
+
+    {% endblock %}
+
+
+
+   </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
