@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Yassr Blog</title>
+    <title>Short Note</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
               </button>
                <a class="navbar-brand" href="{% url 'home' %}">Short Note</a>
-{#               <a class="navbar-brand" href="{% url 'index'  %}">Yassr's Blog</a>#}
+{#               <a class="navbar-brand" href="{% url 'index'  %}">Short Note</a>#}
            </div>
            <div class="collapse navbar-collapse" id="mynav">
                 <ul class="nav navbar-nav">
@@ -35,20 +35,22 @@
 
    <div class="container">
        <h1 class ="text-center"><b>Short Note</b></h1>
+       {% load static %}
+       <img src = "{% static 'uploads/testpic.jpeg' %}" width="800px" class="img-responsive center-block"/>
 
      <br /><br />
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Upload Options <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="{% url 'simple_upload'  %}">Video Upload</a></li>
-        <li><a href="{% url 'simple_upload'  %}">Audio Upload</a></li>
-        <li><a href="{% url 'simple_upload'  %}">Text File Upload</a></li>
 
-      </ul>
-    </div>
+    <!--<div class="btn-group">-->
+      <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+        <!--Upload Options <span class="caret"></span>-->
+      <!--</button>-->
+      <!--<ul class="dropdown-menu">-->
+        <!--<li><a href="{% url 'simple_upload'  %}">Video Upload</a></li>-->
+        <!--<li><a href="{% url 'simple_upload'  %}">Audio Upload</a></li>-->
+        <!--<li><a href="{% url 'simple_upload'  %}">Text File Upload</a></li>-->
 
+      <!--</ul>-->
+    <!--</div>-->
 
 
     {% block content %}
@@ -69,35 +71,31 @@
     {% block media %}
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="myfile">
-        <button type="submit">Upload</button>
+        <input type="file" name="myfile" class="btn btn-primary btn-sm">
+        <button type="submit" class="btn btn-secondary btn-sm">Upload</button>
       </form>
 
       {% if file_extentionV %}
       <div align="center" class="embed-responsive embed-responsive-16by9">
-{#          <iframe class="embed-responsive-item" src="{{ uploaded_file_url }}" controls="" autoplay="" ></iframe>#}
-          <video src="{{ uploaded_file_url }}" preload="auto" controls="" autoplay=""></video>
+          <video src="{{ uploaded_file_url }}" preload="auto" controls="" autoplay="false"></video>
       </div>
-          <p>This is the video Duration : {{ obj.video_size }}</p>
       {% endif %}
       {% if file_extentionA %}
-          <div align="left" class="embed-responsive embed-responsive-16by9">
-            <audio src="{{ uploaded_file_url }}" preload="auto" controls="" autoplay=""></audio>
-        </div>
+      <div align="left" class="embed-responsive embed-responsive-16by9">
+            <audio src="{{ uploaded_file_url }}" preload="auto" controls="" autoplay="false"></audio>
+      </div>
       {% endif %}
+      <a href="{% url 'summary' %}"><button name="sumbutt" type="button" class="btn btn-primary btn-lg btn-block" >Summarise</button></a>
+
+
     {% endblock %}
       </div>
 
     </div>
 
-
-
     {% endblock %}
 
-
-
    </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

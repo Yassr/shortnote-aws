@@ -21,11 +21,14 @@ from uploads import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.simple_upload, name='home'),
     url(r'^upload/', views.simple_upload, name='upload'),
     url(r'^uploads/simple/$', views.simple_upload, name='simple_upload'),
+    url(r'^uploads/summary/$', views.video_clip, name='summary'),
+
 ]
 
 
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

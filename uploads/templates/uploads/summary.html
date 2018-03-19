@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Short Note</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+   <nav class="navbar navbar-inverse">
+       <div class="container">
+           <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+               <a class="navbar-brand" href="{% url 'home' %}">Short Note</a>
+{#               <a class="navbar-brand" href="{% url 'index'  %}">Short Note</a>#}
+           </div>
+           <div class="collapse navbar-collapse" id="mynav">
+                <ul class="nav navbar-nav">
+                    <li ><a>About</a></li>
+                    <li ><a href="https://github.com/Yassr">GitHub</a></li>
+                    <li ><a href="https://www.linkedin.com/in/yassrshaar/">LinkedIn</a></li>
+                </ul>
+           </div>
+       </div>
+   </nav>
+    <!--{{ uploaded_file_url }}<br />-->
+    <!--{{ audio_url }}<br />-->
+    <!--{{ shortnote_ts }}<br />-->
+    <!--{{ shortnote_mp4 }}<br />-->
+   <div class="container">
+       <h1 class ="text-center"><b>Short Note</b></h1>
+       {% load static %}
+       <img src = "{% static 'uploads/summarisedpic.png' %}" width="800px" class="img-responsive center-block"/>
+
+     <br /><br />
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+      <div align="center" class="embed-responsive embed-responsive-16by9">
+          <video src="{{ the_final_mp4 }}" preload="auto" controls="" autoplay="true"></video>
+      </div>
+      </div>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading" style='margin: 1em;padding: 0 4em 2em 0;'>Summarised Sentences</h4>
+            <p style='margin: 1em;padding: 0 4em 2em 0;'>{{ all_lines|linebreaksbr }}</p>
+          </div>
+        </div>
+
+
+    </div>
+
+   </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
